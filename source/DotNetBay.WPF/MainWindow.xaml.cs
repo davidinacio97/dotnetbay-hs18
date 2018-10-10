@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using DotNetBay.Core;
+using DotNetBay.Data.Entity;
 
 namespace DotNetBay.WPF
 {
@@ -22,7 +12,22 @@ namespace DotNetBay.WPF
     {
         public MainWindow()
         {
+            var app = App.Current as App;
             InitializeComponent();
+            
+
+            IAuctionService auctionService = new AuctionService(app.MainRepository, new SimpleMemberService(app.MainRepository));
+            Auctions = new ObservableCollection<Auction>(auctionService.GetAll());
+            DataContext = this;
+
+        }
+
+        public ObservableCollection<Auction> Auctions { get; }
+
+        private void NewAuction_OnClick(object sender, RoutedEventArgs e)
+        {
+            var sellView = new SellView();
+            sellView.ShowDialog();
         }
     }
 }
