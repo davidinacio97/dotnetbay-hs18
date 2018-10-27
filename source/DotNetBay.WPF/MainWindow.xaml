@@ -13,7 +13,11 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button Name="NewAuction" HorizontalAlignment="Left" Grid.Row="1" Content="New Auction" Click="NewAuction_OnClick" />
+        <StackPanel Grid.Row="1" FlowDirection="LeftToRight" Orientation="Horizontal" Margin="5">
+            <Button Name="NewAuction" HorizontalAlignment="Left" Content="New Auction" Click="NewAuction_OnClick" />
+            <Button Name="NewBidTest" HorizontalAlignment="Left" Content="Test Bid Button" Click="NewBidTest_OnClick" />
+        </StackPanel>
+        
 
         <DataGrid Name="AuctionsDataGrid" Grid.Row="2" ItemsSource="{Binding Auctions}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DotNetBay.Core;
 using DotNetBay.Data.Entity;
+using Microsoft.Win32;
 
 namespace DotNetBay.WPF
 {
@@ -22,10 +23,18 @@ namespace DotNetBay.WPF
     public partial class SellView : Window
     {
         private readonly IAuctionService _auctionService;
-        
+        private string _pathToImage;
+
         public Auction NewAuction { get; }
 
-        public String PathToImage { get; set; }
+        public String PathToImage
+        {
+            get => _pathToImage;
+            set
+            {
+                _pathToImage = value;
+            }
+        }
 
         public SellView()
         {
@@ -41,6 +50,15 @@ namespace DotNetBay.WPF
                     StartDateTimeUtc = DateTime.UtcNow,
                     EndDateTimeUtc = DateTime.UtcNow.AddDays(7)
                 };
+            }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                PathToImage = openFileDialog.FileName;
             }
         }
     }

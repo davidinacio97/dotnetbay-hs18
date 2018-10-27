@@ -29,5 +29,12 @@ namespace DotNetBay.WPF
             var sellView = new SellView();
             sellView.ShowDialog();
         }
+
+        private void NewBidTest_OnClick(object sender, RoutedEventArgs e)
+        {
+            var bidView = new BidView();
+            bidView.CurrentAuction = new Auction();
+            bidView.ShowDialog();
+        }
     }
 }
