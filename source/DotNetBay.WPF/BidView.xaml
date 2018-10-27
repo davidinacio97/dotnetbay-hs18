@@ -1,0 +1,55 @@
+﻿<Window x:Class="DotNetBay.WPF.BidView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        d:DataContext="{d:DesignInstance Type=local:BidView}"
+        xmlns:local="clr-namespace:DotNetBay.WPF"
+        mc:Ignorable="d"
+        Title="BidView" Height="450" Width="800">
+    <Grid Margin="5">
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="0, 0, 0, 4" />
+            </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="0, 0, 0, 4"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Name="TitleLabel" Content="Place Bid For Auction" FontSize="20" FontFamily="ComicSansMs" Grid.Column="0" Grid.Row="0"/>
+        <Label Name="AuctionTitleLabel" Content="Title" FontSize="12" FontFamily="ComicSansMs" Grid.Column="0" Grid.Row="1"/>
+        <Label Name="DescriptionTitleLabel" Content="Description" FontSize="12" FontFamily="ComicSansMs" Grid.Column="0" Grid.Row="3"/>
+        <Label Name="StartPriceTitleLabel" Content="Start Price" FontSize="12" FontFamily="ComicSansMs" Grid.Column="0" Grid.Row="4"/>
+        <Label Name="CurrentPriceTitleLabel" Content="Current Price" FontSize="12" FontFamily="ComicSansMs" Grid.Column="0" Grid.Row="5"/>
+
+        <Label Name="YourBidTitleLabel" Content="Your Bid" FontWeight="Bold" FontSize="14" FontFamily="ComicSansMs" Grid.Column="0" Grid.Row="6"/>
+
+        <Label Name="AuctionLabel" Content="{Binding CurrentAuction.Title}" FontSize="12" FontFamily="ComicSansMs" Grid.Column="1" Grid.Row="1"/>
+        <Image Name="AuctionPicture" Source="{Binding CurrentAuction.Image}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="2" />
+        <Label Name="EnterDescriptionLabel" Content="{Binding CurrentAuction.Description}" FontSize="12" FontFamily="ComicSansMs" Grid.Column="1" Grid.Row="3"/>
+        <Label Name="StartPriceLabel" Content="{Binding CurrentAuction.StartPrice}" FontSize="12" FontFamily="ComicSansMs" Grid.Column="1" Grid.Row="4"/>
+        <Label Name="CurrentPriceLabel" Content="{Binding CurrentAuction.CurrentPrice}" FontSize="12" FontFamily="ComicSansMs" Grid.Column="1" Grid.Row="5"/>
+
+        <TextBox Name="YourBidTextBox" FontSize="14" FontFamily="ComicSansMs" Grid.Column="1" Grid.Row="6"/>
+
+        <StackPanel Grid.Row="7" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Horizontal" Margin="5" >
+            <Button Name="PlaceBidButton" IsDefault="True" HorizontalAlignment="Right" Content="Cancel" Margin="10, 5, 0, 0"/>
+            <Button Name="CancelButton" IsCancel="True" HorizontalAlignment="Left" Content="Add Auction" Margin="10, 5, 0, 0"/>
+        </StackPanel>
+    </Grid>
+</Window>
