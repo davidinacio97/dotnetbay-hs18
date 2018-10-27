@@ -23,18 +23,10 @@ namespace DotNetBay.WPF
     public partial class SellView : Window
     {
         private readonly IAuctionService _auctionService;
-        private string _pathToImage;
 
         public Auction NewAuction { get; }
 
-        public String PathToImage
-        {
-            get => _pathToImage;
-            set
-            {
-                _pathToImage = value;
-            }
-        }
+        public String PathToImage { get; set; }
 
         public SellView()
         {
