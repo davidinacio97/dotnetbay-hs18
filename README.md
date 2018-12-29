@@ -2,18 +2,10 @@
 #Master: [![Build status](https://ci.appveyor.com/api/projects/status/p8p63ws0y05m51ev/branch/master?svg=true)](https://ci.appveyor.com/project/davidinacio97/dotnetbay-hs18/branch/master)
 #Project: [![Build status](https://ci.appveyor.com/api/projects/status/p8p63ws0y05m51ev?svg=true)](https://ci.appveyor.com/project/davidinacio97/dotnetbay-hs18)
 
-A bootstrap solution to build your own basic auction portal.
+##State of Implementation
+WPF MVVM  Solution
+Ths solution contains the sample implementation for lab04 WPF MVVM
 
-## Goals
-This is the starting point for various extensions to the core business library. The current storage implementation is done by serializing data to json-files. There is no graphical user interface, just a command line.
-
-With focus on the .NET-Stack, at least the following technologies should be added to extend the base implementation.
-
-* WPF / XAML UI
-* EntityFramework
-* ASP.NET MVC 5
-* ASP.NET WebApi
-* ASP.NET SignalR
 
 See more details on the official course website: http://web.fhnw.ch/plattformen/dnead
 
@@ -30,8 +22,7 @@ The following products / tools are needed to contribute / fork.
 
 ## Authors
 * Michael Schnyder
-* Martin Kropp
-* Daniel Pfulg
+* Martin Kropp, martin.kropp@fhnw.ch
 
 ## License
 Licensed under the MIT License
