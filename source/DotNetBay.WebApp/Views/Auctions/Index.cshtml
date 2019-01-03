@@ -91,7 +91,7 @@
             <td>
                 @if (item.IsRunning)
                 {
-                    @Html.ActionLink("Bid", "Bid", new {id = item.Id})
+                    @Html.ActionLink("Bid", "Create","Bids", new {AuctionId = item.Id}, null)
                 }
             @*@Html.ActionLink("Edit", "Edit", new { id=item.Id })*@
                 |
