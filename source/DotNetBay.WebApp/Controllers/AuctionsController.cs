@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using DotNetBay.Core;
 using DotNetBay.Data.EF;
@@ -19,7 +15,6 @@ namespace DotNetBay.WebApp.Controllers
         public AuctionsController()
         {
             this.mainRepository = new EFMainRepository();
-
             this.service = new AuctionService(this.mainRepository, new SimpleMemberService(this.mainRepository));
         }
 
@@ -32,7 +27,21 @@ namespace DotNetBay.WebApp.Controllers
         // GET: Auctions/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var auction = this.service.GetAll().FirstOrDefault(a => a.Id == id);
+            if (auction == null)
+            {
+                return HttpNotFound();
+            }
+
+            var vmAuction = new NewAuctionViewModel()
+            {
+                Description = auction.Description,
+                EndDateTimeUtc = auction.EndDateTimeUtc,
+                StartDateTimeUtc = auction.StartDateTimeUtc,
+                StartPrice = auction.StartPrice,
+                Title = auction.Title
+            };
+            return View(vmAuction);
         }
 
         // GET: Auctions/Create
@@ -43,7 +52,8 @@ namespace DotNetBay.WebApp.Controllers
 
         // POST: Auctions/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "StartPrice,Title,Description,StartDateTimeUtc,EndDateTimeUtc")]
+        public ActionResult Create(
+            [Bind(Include = "StartPrice,Title,Description,StartDateTimeUtc,EndDateTimeUtc,Image")]
             NewAuctionViewModel viewAuction)
         {
             if (this.ModelState.IsValid)
@@ -60,10 +70,36 @@ namespace DotNetBay.WebApp.Controllers
                     Seller = members.GetCurrentMember(),
                 };
 
+                if (viewAuction.Image != null)
+                {
+                    byte[] fileContent = new byte[viewAuction.Image.InputStream.Length];
+                    viewAuction.Image.InputStream.Read(fileContent, 0, fileContent.Length);
+
+                    auction.Image = fileContent;
+                }
+
                 this.service.Save(auction);
                 return RedirectToAction("Index");
             }
+
             return View();
+        }
+
+        public ActionResult Image(int auctionId)
+        {
+            var auction = this.service.GetAll().FirstOrDefault(a => a.Id == auctionId);
+
+            if (auction == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (auction.Image != null)
+            {
+                return new FileContentResult(auction.Image, "image/jpg");
+            }
+
+            return new EmptyResult();
         }
     }
 }
