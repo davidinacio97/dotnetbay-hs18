@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    var color = "";
 }
 
 <h2>Index</h2>
@@ -40,7 +41,7 @@
 
     @foreach (var item in Model)
     {
-        var color = "";
+
         if (item.IsRunning)
         {
             color = "green";
@@ -57,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
                 <p style="text-align: center">
 
-                    <img src="/Auctions/Image?auctionId=@item.Id" style="max-height: 120px; max-width: 180px"/>
+                    <img src="/Auctions/Image?auctionId=@item.Id" style="max-height: 120px; max-width: 180px" />
                 </p>
             </td>
             <td>
@@ -95,9 +96,9 @@
             <td>
                 @if (item.IsRunning)
                 {
-                    @Html.ActionLink("Bid", "Create", "Bids", new {AuctionId = item.Id}, null)
+                    @Html.ActionLink("Bid", "Create", "Bids", new { AuctionId = item.Id }, null)
                 }
-                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             </td>
         </tr>
     }
