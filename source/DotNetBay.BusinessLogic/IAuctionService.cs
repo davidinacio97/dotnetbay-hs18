@@ -6,7 +6,7 @@ namespace DotNetBay.Core
 {
     public interface IAuctionService
     {
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Keep this as is to mainfest the dynamic of this acess")]
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Keep this as is to mainfest the dynamic of this access")]
         IQueryable<Auction> GetAll();
 
         Auction Save(Auction auction);
