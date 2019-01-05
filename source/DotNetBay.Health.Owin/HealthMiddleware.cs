@@ -11,17 +11,26 @@ namespace DotNetBay.Health.Owin
 {
     public class HealthMiddleware : OwinMiddleware
     {
-        private EFMainRepository repository;
+        private readonly EFMainRepository repository;
 
-        public HealthMiddleware(OwinMiddleware next) : base(next)
+        private readonly string route;
+
+        public HealthMiddleware(OwinMiddleware next, string route) : base(next)
         {
+            this.route = route;
             repository = new EFMainRepository();
         }
 
         public override async Task Invoke(IOwinContext context)
         {
-            context.Response.Write(CreateHealthPage());
-            await this.Next.Invoke(context);
+            if (context.Request.Path.Value.EndsWith(route))
+            {
+                var healthPage = CreateHealthPage();
+                context.Response.Write(healthPage);
+                return;
+            }
+
+            await Next.Invoke(context);
         }
 
         private string CreateHealthPage()
@@ -29,7 +38,8 @@ namespace DotNetBay.Health.Owin
             StringBuilder healthBuilder = new StringBuilder();
             healthBuilder.AppendLine("<h1>Health Information</h1>");
             healthBuilder.AppendLine("<h2>Database Connection String</h2>");
-            healthBuilder.AppendLine($"Data Source: {repository.Database.Connection.ConnectionString}");
+            var connectionConnectionString = repository.Database.Connection.ConnectionString;
+            healthBuilder.AppendLine($"Data Source: {connectionConnectionString}");
             healthBuilder.AppendLine("<h2>Data Health</h2>");
             healthBuilder.AppendLine($"Number of Auctions: {repository.GetAuctions().Count()}");
             return healthBuilder.ToString();

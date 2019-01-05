@@ -11,7 +11,9 @@ namespace DotNetBay.SelfHost
     {
         static void Main(string[] args)
         {
-            WebApp.Start<Startup>(url: "http://localhost:1901/");
+            WebApp.Start<Startup>("http://localhost:1901/");
+
+            Console.ReadLine();
         }
     }
 }

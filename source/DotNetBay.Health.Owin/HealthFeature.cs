@@ -7,11 +7,11 @@ using Owin;
 
 namespace DotNetBay.Health.Owin
 {
-    public static class IAppBuilderExtensions
+    public static class HealthFeature
     {
         public static void UseHealth(this IAppBuilder app, string route)
         {
-            app.Use(new HealthMiddleware(n);
+            app.Use(typeof(HealthMiddleware), route);
         }
     }
 }

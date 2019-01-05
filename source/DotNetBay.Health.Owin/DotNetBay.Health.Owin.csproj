@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HealthMiddleware.cs" />
-    <Compile Include="IAppBuilderExtensions.cs" />
+    <Compile Include="HealthFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
