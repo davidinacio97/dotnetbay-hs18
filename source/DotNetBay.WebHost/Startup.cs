@@ -1,39 +1,31 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Threading.Tasks;
+using Microsoft.Owin;
+using Owin;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
-using DotNetBay.Health.Owin;
-using DotNetBay.WebApi;
-using Microsoft.Owin;
-using Microsoft.Owin.Extensions;
-using Owin;
 
-[assembly: OwinStartup(typeof(DotNetBay.SelfHost.Startup))]
+[assembly: OwinStartup(typeof(DotNetBay.WebHost.Startup))]
 
-namespace DotNetBay.SelfHost
+namespace DotNetBay.WebHost
 {
     public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            // Lab 08 - OWIN
-            //app.UseHealth("/health");
-
-            // Lab 09 - Web API
             HttpConfiguration config = new HttpConfiguration();
+            config.Services.Replace(typeof(IAssembliesResolver), new AssembliesResolver());
             config.MapHttpAttributeRoutes();
+
+            /*
             config.Routes.MapHttpRoute(
-                name: "DotNetBay",
+                name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            */
 
-            config.Services.Replace(typeof(IAssembliesResolver), new AssembliesResolver());
             app.UseWebApi(config);
-            config.EnsureInitialized();
         }
     }
 

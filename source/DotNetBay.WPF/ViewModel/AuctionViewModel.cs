@@ -28,6 +28,7 @@ namespace DotNetBay.WPF.ViewModel
         public AuctionViewModel(Auction auction)
         {
             this.auction = auction;
+            this.CurrentPrice = auction.CurrentPrice;
 
             this.AddBidCommand = new RelayCommand(this.AddBidAction);
 
@@ -165,7 +166,7 @@ namespace DotNetBay.WPF.ViewModel
         private void AddBidAction()
         {
             var view = new BidView(this.auction);
-            view.Show();
+            view.ShowDialog();
         }
 
         private void Apply()

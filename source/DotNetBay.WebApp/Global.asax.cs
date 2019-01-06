@@ -9,7 +9,7 @@ using DotNetBay.Data.EF;
 
 namespace DotNetBay.WebApp
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         public static IAuctionRunner AuctionRunner { get; private set; }
 
