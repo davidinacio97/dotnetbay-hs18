@@ -55,7 +55,7 @@ namespace DotNetBay.WebApi.Controller
             }
 
             var responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
-            responseMessage.Content = new ByteArrayContent(auction.Image);
+            responseMessage.Content = new ByteArrayContent(auction.Image ?? new byte[0]);
             responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
             return ResponseMessage(responseMessage);
 
@@ -106,8 +106,8 @@ namespace DotNetBay.WebApi.Controller
             auction.StartPrice = auctionDto.StartPrice;
             auction.CurrentPrice = auctionDto.StartPrice;
             auction.Seller = repository.GetMembers().FirstOrDefault(m => m.DisplayName.Equals(auctionDto.SellerName));
-            auction.StartDateTimeUtc = DateTime.Now.AddHours(6);
-            auction.EndDateTimeUtc = auction.StartDateTimeUtc.AddDays(auctionDto.RunningDays);
+            auction.StartDateTimeUtc = DateTime.ParseExact(auctionDto.StartDateTimeUtc, "MM/dd/yyyy HH:mm:ss", null);
+            auction.EndDateTimeUtc = DateTime.ParseExact(auctionDto.EndDateTimeUtc, "MM/dd/yyyy HH:mm:ss", null);
             return auction;
         }
     }

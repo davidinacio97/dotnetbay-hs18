@@ -2,7 +2,7 @@
 using System.Globalization;
 using DotNetBay.Data.Entity;
 
-namespace DotNetBay.WebApi.DTO
+namespace DotNetBay.Core.Services.DTO
 {
     public class AuctionDto
     {

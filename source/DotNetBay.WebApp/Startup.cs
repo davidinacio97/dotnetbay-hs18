@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using DotNetBay.Core.Execution;
+using DotNetBay.Data.EF;
 using DotNetBay.WebApi.Controller;
 using DotNetBay.WebApp;
 using Microsoft.Owin;
@@ -16,6 +18,9 @@ namespace DotNetBay.WebApp
     {
         public void Configuration(IAppBuilder app)
         {
+            var auctionRunner = new AuctionRunner(new EFMainRepository());
+            auctionRunner.Start();
+
             var type = typeof(AuctionController);
             Console.WriteLine(type);
 
