@@ -72,25 +72,18 @@ namespace DotNetBay.WebApi.Controller
         [HttpPost, Route("{id}/bid")]
         public IHttpActionResult Create(int id, BidDto bidDto)
         {
-            var auction = repository.GetAuctions().FirstOrDefault(a => a.Id == id);
+            var auction = service.GetAll().FirstOrDefault(a => a.Id == id);
             if (auction == null)
             {
                 return BadRequest($"No auction with id {id} found");
             }
-
-            var bidder = repository.GetMembers().FirstOrDefault(m => m.Id == bidDto.BidderId);
-            if (bidder == null)
-            {
-                return BadRequest($"No member with id {bidDto.BidderId} found");
-            }
-
             service.PlaceBid(auction, bidDto.Amount);
             return Ok();
         }
 
         [HttpPost]
         [Route("{id}/image")]
-        public async Task<IHttpActionResult> Create(long id)
+        public IHttpActionResult Create(long id)
         {
             Auction auction = repository.GetAuctions().FirstOrDefault(a => a.Id == id);
             if (auction == null)
@@ -108,8 +101,13 @@ namespace DotNetBay.WebApi.Controller
         private Auction CreateAuction(AuctionDto auctionDto)
         {
             Auction auction = new Auction();
-            auction.CurrentPrice = auction.CurrentPrice;
+            auction.Title = auctionDto.Title;
+            auction.Description = auctionDto.Description;
+            auction.StartPrice = auctionDto.StartPrice;
+            auction.CurrentPrice = auctionDto.StartPrice;
             auction.Seller = repository.GetMembers().FirstOrDefault(m => m.DisplayName.Equals(auctionDto.SellerName));
+            auction.StartDateTimeUtc = DateTime.Now.AddHours(6);
+            auction.EndDateTimeUtc = auction.StartDateTimeUtc.AddDays(auctionDto.RunningDays);
             return auction;
         }
     }

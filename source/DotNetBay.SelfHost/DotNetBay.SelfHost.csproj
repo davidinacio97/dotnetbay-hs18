@@ -83,10 +83,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DotNetBay.BusinessLogic\DotNetBay.BusinessLogic.csproj">
+      <Project>{9EF46B21-B552-4CC6-A4C0-E81091A4064B}</Project>
+      <Name>DotNetBay.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetBay.Data.EF\DotNetBay.Data.EF.csproj">
+      <Project>{95C884A6-9236-4294-9298-1DF51F21B2E0}</Project>
+      <Name>DotNetBay.Data.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotNetBay.Health.Owin\DotNetBay.Health.Owin.csproj">
       <Project>{85A0FBB7-8265-4DC4-BA45-DAAAC8681CB5}</Project>
       <Name>DotNetBay.Health.Owin</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetBay.Interfaces\DotNetBay.Interfaces.csproj">
+      <Project>{17745E6C-337C-44BD-9C50-5F1D45CEADA5}</Project>
+      <Name>DotNetBay.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\DotNetBay.WebApi\DotNetBay.WebApi.csproj">
       <Project>{7c9e2bc9-65e8-4678-a2de-17e14c2ed42b}</Project>
