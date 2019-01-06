@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DotNetBay.SignalR.Hubs;
 
 namespace DotNetBay.WebApi.Controller
 {
@@ -66,6 +67,7 @@ namespace DotNetBay.WebApi.Controller
         {
             Auction auction = CreateAuction(auctionDto);
             service.Save(auction);
+            AuctionsHub.NotifyNewAuction(auction);
             return Ok();
         }
 
