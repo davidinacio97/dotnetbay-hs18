@@ -39,6 +39,9 @@ namespace DotNetBay.WebApp
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             app.UseWebApi(config);
+
+            //Lab 10 A1.4
+            app.MapSignalR();
         }
     }
 }
