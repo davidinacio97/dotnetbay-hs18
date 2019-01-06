@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\IsClosedToStatusTextConverter.cs" />
+    <Compile Include="RemoteAuctioneer.cs" />
     <Compile Include="ViewModel\AuctionViewModel.cs" />
     <Compile Include="ViewModel\BidViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

@@ -79,7 +79,11 @@ namespace DotNetBay.WebApi.Controller
             {
                 return BadRequest($"No auction with id {id} found");
             }
-            service.PlaceBid(auction, bidDto.Amount);
+            Bid bid = service.PlaceBid(auction, bidDto.Amount);
+            if (bid.Accepted.HasValue && bid.Accepted.Value)
+            {
+                AuctionsHub.NotifyBidAccepted(auction, bid);
+            }
             return Ok();
         }
 

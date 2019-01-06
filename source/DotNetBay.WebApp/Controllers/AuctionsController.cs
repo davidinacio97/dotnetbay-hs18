@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using DotNetBay.Core;
 using DotNetBay.Data.EF;
 using DotNetBay.Data.Entity;
+using DotNetBay.SignalR.Hubs;
 using DotNetBay.WebApp.Models;
 
 namespace DotNetBay.WebApp.Controllers
@@ -79,6 +80,7 @@ namespace DotNetBay.WebApp.Controllers
                 }
 
                 this.service.Save(auction);
+                AuctionsHub.NotifyNewAuction(auction); 
                 return RedirectToAction("Index");
             }
 
