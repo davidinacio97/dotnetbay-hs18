@@ -2,7 +2,7 @@
 
 namespace DotNetBay.WebApi.Controller
 {
-    [RoutePrefix("status")]
+    [RoutePrefix("api/status")]
     public class StatusController : ApiController
     {
 
