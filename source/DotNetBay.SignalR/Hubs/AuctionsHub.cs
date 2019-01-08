@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace DotNetBay.SignalR.Hubs
         public static void NotifyNewAuction(Auction auction)
         {
             GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>()
-                .Clients.All.NewAuction(auction.Id);
+                .Clients.All.NewAuction(auction.Title);
         }
 
         public static void NotifyBidAccepted(Auction auction, Bid bid)
